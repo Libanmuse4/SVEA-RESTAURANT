@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Svea Restaurant — Andersonville, Chicago</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5efe3;
+    --warm-white: #faf7f2;
+    --deep-navy: #1a2234;
+    --slate: #2e3f55;
+    --gold: #c4923a;
+    --gold-light: #e8b96a;
+    --rust: #8b3a2a;
+    --sage: #5a7a5c;
+    --text: #2a2018;
+    --muted: #7a6e62;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Lora', serif;
+    overflow-x: hidden;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    background: var(--deep-navy);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(196,146,58,0.04) 40px, rgba(196,146,58,0.04) 41px),
+      repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(196,146,58,0.04) 40px, rgba(196,146,58,0.04) 41px);
+    pointer-events: none;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-flag {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .flag-stripe {
+    width: 40px;
+    height: 3px;
+    background: var(--gold);
+  }
+
+  .hero-flag span {
+    font-family: 'Lora', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 7vw, 90px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.0;
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s 0.25s ease both;
+  }
+
+  .hero-rating {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s 0.35s ease both;
+  }
+
+  .rating-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .rating-info {
+    border-left: 1px solid rgba(196,146,58,0.3);
+    padding-left: 16px;
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .rating-info p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--deep-navy);
+    padding: 14px 32px;
+    font-family: 'Lora', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 14px 32px;
+    font-family: 'Lora', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 60px 40px;
+    z-index: 2;
+  }
+
+  .hero-deco {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 320px;
+    border: 1px solid rgba(196,146,58,0.2);
+    border-radius: 50%;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+
+  .hero-deco::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(196,146,58,0.12);
+    border-radius: 50%;
+  }
+
+  .hero-illustration {
+    font-size: 140px;
+    position: relative;
+    z-index: 3;
+    animation: fadeUp 0.8s 0.6s ease both;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.5));
+  }
+
+  .hero-info-strip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(196,146,58,0.08);
+    border-top: 1px solid rgba(196,146,58,0.2);
+    display: flex;
+    z-index: 10;
+    animation: fadeUp 0.8s 0.7s ease both;
+  }
+
+  .info-item {
+    flex: 1;
+    padding: 20px 24px;
+    border-right: 1px solid rgba(196,146,58,0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .info-item:last-child { border-right: none; }
+
+  .info-icon { font-size: 18px; opacity: 0.8; }
+
+  .info-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .info-value {
+    font-size: 13px;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  /* ---- ABOUT ---- */
+  .about {
+    background: var(--warm-white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+  }
+
+  .about-left {
+    background: var(--slate);
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-left::before {
+    content: 'SVEA';
+    position: absolute;
+    bottom: -20px;
+    right: -10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 700;
+    color: rgba(196,146,58,0.06);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -4px;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(196,146,58,0.3);
+    max-width: 60px;
+  }
+
+  .about-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .about-left h2 em { color: var(--gold); }
+
+  .about-left p {
+    color: rgba(245,239,227,0.7);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .about-right {
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-right .section-tag { color: var(--slate); }
+  .about-right .section-tag::after { background: rgba(46,63,85,0.2); }
+
+  .about-right h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--deep-navy);
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .about-right p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .feature {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .feature-icon {
+    font-size: 20px;
+    margin-top: 2px;
+  }
+
+  .feature-text {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .feature-text strong {
+    display: block;
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  /* ---- HOURS ---- */
+  .hours-section {
+    background: var(--cream);
+    padding: 100px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hours-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--rust), var(--gold));
+  }
+
+  .hours-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hours-section .section-tag {
+    justify-content: center;
+    color: var(--rust);
+    margin-bottom: 12px;
+  }
+  .hours-section .section-tag::after { display: none; }
+
+  .hours-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    text-align: center;
+    color: var(--deep-navy);
+    margin-bottom: 60px;
+  }
+
+  .hours-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+  }
+
+  .day-card {
+    background: var(--warm-white);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 24px 12px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .day-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+  .day-card.weekend { background: var(--slate); }
+
+  .day-name {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .day-card.weekend .day-name { color: rgba(245,239,227,0.6); }
+
+  .day-open {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--deep-navy);
+    margin-bottom: 4px;
+  }
+  .day-card.weekend .day-open { color: var(--gold); }
+
+  .day-close {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .day-card.weekend .day-close { color: rgba(245,239,227,0.5); }
+
+  .hours-note {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ---- REVIEWS ---- */
+  .reviews-section {
+    background: var(--deep-navy);
+    padding: 100px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reviews-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(196,146,58,0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(139,58,42,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .reviews-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+  }
+
+  .reviews-header .section-tag { color: var(--gold); margin-bottom: 12px; }
+  .reviews-header .section-tag::after { background: rgba(196,146,58,0.3); }
+
+  .reviews-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--cream);
+  }
+
+  .reviews-summary {
+    text-align: right;
+  }
+
+  .reviews-summary .big-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .reviews-summary p {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .score-bars {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .score-bar-bg {
+    width: 80px;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .review-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 32px;
+    transition: background 0.2s, transform 0.2s;
+    position: relative;
+  }
+  .review-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-3px); }
+
+  .review-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--gold);
+    opacity: 0.4;
+    line-height: 0.6;
+    margin-bottom: 16px;
+  }
+
+  .review-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(245,239,227,0.8);
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .review-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .reviewer-name {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .review-date {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .review-stars {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  /* ---- LOCATION ---- */
+  .location-section {
+    background: var(--warm-white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .location-info {
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .location-info .section-tag { color: var(--sage); }
+  .location-info .section-tag::after { background: rgba(90,122,92,0.3); }
+
+  .location-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: var(--deep-navy);
+    margin-bottom: 40px;
+  }
+
+  .contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .contact-icon-wrap {
+    width: 44px;
+    height: 44px;
+    background: var(--deep-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .contact-detail strong {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .contact-detail p {
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .cash-notice {
+    background: var(--rust);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .cash-notice span { font-size: 20px; }
+
+  .cash-notice p {
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .location-map {
+    background: var(--slate);
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map-embed {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(40%) contrast(1.05);
+    opacity: 0.85;
+  }
+
+  .map-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+    background: linear-gradient(0deg, rgba(26,34,52,0.9) 0%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    z-index: 2;
+  }
+
+  .map-address {
+    color: var(--cream);
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  .neighborhood-badge {
+    background: var(--gold);
+    color: var(--deep-navy);
+    padding: 6px 16px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-style: normal;
+    font-family: 'Lora', serif;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--deep-navy);
+    padding: 60px 80px 40px;
+    border-top: 1px solid rgba(196,146,58,0.2);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .footer-brand h3 em { color: var(--gold); }
+
+  .footer-brand p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 260px;
+    margin-top: 16px;
+  }
+
+  .footer-col h4 {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col li {
+    font-size: 13px;
+    color: rgba(245,239,227,0.6);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-col li::before {
+    content: '—';
+    color: var(--gold);
+    opacity: 0.4;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .swedish-emblem {
+    font-size: 24px;
+    opacity: 0.6;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero, .about, .location-section { grid-template-columns: 1fr; }
+    .hero-right { min-height: 300px; }
+    .hero-info-strip { flex-wrap: wrap; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .hours-grid { grid-template-columns: repeat(4, 1fr); }
+    .reviews-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .reviews-summary { text-align: left; }
+    .score-bars { align-items: flex-start; }
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    .hero-left { padding: 60px 32px; }
+    .hours-section, .reviews-section { padding: 80px 32px; }
+    .location-info { padding: 60px 32px; }
+    footer { padding: 60px 32px 40px; }
+    .about-left, .about-right { padding: 60px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+
+  <div class="hero-left">
+    <div class="hero-flag">
+      <div class="flag-stripe"></div>
+      <span>Andersonville · Chicago · Est. Since</span>
+    </div>
+
+    <h1>Svea<br><em>Restaurant</em></h1>
+    <p class="hero-sub">A taste of Sweden in the heart of Chicago</p>
+
+    <div class="hero-rating">
+      <div class="rating-number">4.2</div>
+      <div class="rating-info">
+        <div class="stars">★★★★☆</div>
+        <p>61 Reviews · TripAdvisor</p>
+        <p style="margin-top:2px;">#682 of 8,934 restaurants in Chicago</p>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#hours" class="btn-primary">See Hours</a>
+      <a href="#location" class="btn-outline">Find Us</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-deco"></div>
+    <div class="hero-illustration">🍳</div>
+  </div>
+
+  <div class="hero-info-strip">
+    <div class="info-item">
+      <span class="info-icon">🕖</span>
+      <div class="info-text">
+        <span class="info-label">Today</span>
+        <span class="info-value">Open until 2:00 PM</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🍽</span>
+      <div class="info-text">
+        <span class="info-label">Cuisine</span>
+        <span class="info-value">Swedish / European</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">💵</span>
+      <div class="info-text">
+        <span class="info-label">Price Range</span>
+        <span class="info-value">$ · Very Affordable</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">📍</span>
+      <div class="info-text">
+        <span class="info-label">Neighborhood</span>
+        <span class="info-value">Andersonville</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-left">
+    <div class="section-tag">Our Story</div>
+    <h2>A Little <em>Corner of<br>Scandinavia</em></h2>
+    <p>Svea is one of Andersonville's most beloved neighborhood gems — a cozy, intimate spot that keeps the spirit of Chicago's old Swedish community alive. With Swedish-inspired décor, homemade food, and a warm, personal atmosphere, stepping inside feels like visiting a Swedish grandmother's kitchen.</p>
+    <p style="margin-top:16px;">For 15+ years, loyal regulars have been coming back for the nostalgia, the limpa bread, the Swedish pancakes, and the korv.</p>
+  </div>
+
+  <div class="about-right">
+    <div class="section-tag">What We Offer</div>
+    <h2>Breakfast, Brunch<br>& Lunch</h2>
+    <p>From the famous Viking Breakfast to Swedish meatball sandwiches and crepe-like pancakes — our menu is simple, honest, and made with care. Nothing over $11.</p>
+
+    <div class="features-grid">
+      <div class="feature">
+        <span class="feature-icon">🥞</span>
+        <div class="feature-text">
+          <strong>Swedish Pancakes</strong>
+          Thin, delicate, and beloved
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🥖</span>
+        <div class="feature-text">
+          <strong>Limpa Bread</strong>
+          Traditional Swedish rye
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🍖</span>
+        <div class="feature-text">
+          <strong>Swedish Sausage</strong>
+          Korv & classic meats
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🐟</span>
+        <div class="feature-text">
+          <strong>Pickled Herring</strong>
+          A Scandinavian staple
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🥚</span>
+        <div class="feature-text">
+          <strong>Egg Combos</strong>
+          Omelets, breakfast plates
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🫙</span>
+        <div class="feature-text">
+          <strong>Meatballs</strong>
+          With mash & lingonberry
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="hours-section" id="hours">
+  <div class="hours-inner">
+    <div class="section-tag">Come visit</div>
+    <h2 class="hours-title">Hours of Operation</h2>
+
+    <div class="hours-grid">
+      <div class="day-card">
+        <div class="day-name">Mon</div>
+        <div class="day-open">7 AM</div>
+        <div class="day-close">to 2 PM</div>
+      </div>
+      <div class="day-card">
+        <div class="day-name">Tue</div>
+        <div class="day-open">7 AM</div>
+        <div class="day-close">to 2 PM</div>
+      </div>
+      <div class="day-card">
+        <div class="day-name">Wed</div>
+        <div class="day-open">7 AM</div>
+        <div class="day-close">to 2 PM</div>
+      </div>
+      <div class="day-card">
+        <div class="day-name">Thu</div>
+        <div class="day-open">7 AM</div>
+        <div class="day-close">to 2 PM</div>
+      </div>
+      <div class="day-card">
+        <div class="day-name">Fri</div>
+        <div class="day-open">7 AM</div>
+        <div class="day-close">to 2 PM</div>
+      </div>
+      <div class="day-card weekend">
+        <div class="day-name">Sat</div>
+        <div class="day-open">7 AM</div>
+        <div class="day-close">to 3 PM</div>
+      </div>
+      <div class="day-card weekend">
+        <div class="day-name">Sun</div>
+        <div class="day-open">7 AM</div>
+        <div class="day-close">to 3 PM</div>
+      </div>
+    </div>
+
+    <p class="hours-note">Weekends run an hour later — come for a leisurely brunch. Small space; a short wait is common on busy mornings.</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="reviews-inner">
+    <div class="reviews-header">
+      <div>
+        <div class="section-tag">What guests say</div>
+        <h2>Guest Reviews</h2>
+      </div>
+      <div class="reviews-summary">
+        <div class="big-num">4.2</div>
+        <p>out of 5 · 61 reviews</p>
+        <div class="score-bars">
+          <div class="score-row">
+            <span>Service</span>
+            <div class="score-bar-bg"><div class="score-bar-fill" style="width:90%"></div></div>
+            <span>4.5</span>
+          </div>
+          <div class="score-row">
+            <span>Food</span>
+            <div class="score-bar-bg"><div class="score-bar-fill" style="width:86%"></div></div>
+            <span>4.3</span>
+          </div>
+          <div class="score-row">
+            <span>Value</span>
+            <div class="score-bar-bg"><div class="score-bar-fill" style="width:90%"></div></div>
+            <span>4.5</span>
+          </div>
+          <div class="score-row">
+            <span>Atmosphere</span>
+            <div class="score-bar-bg"><div class="score-bar-fill" style="width:80%"></div></div>
+            <span>4.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">You can't beat a Viking Breakfast! Svea is a great little place with awesome food. The whole neighborhood is great but Svea is a taste of Sweden. Service was great. Friendly feel with awesome food.</p>
+        <div class="review-meta">
+          <div>
+            <div class="reviewer-name">Theresa C.</div>
+            <div class="review-date">March 2025</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">Svea is a great place to have a breakfast of eggs, Swedish pancakes, korv, and some limpa toast. I've been coming here for the past 15+ years. Being here reminds me of my Swedish grandmother's house, especially around Christmas time.</p>
+        <div class="review-meta">
+          <div>
+            <div class="reviewer-name">Jim T.</div>
+            <div class="review-date">August 2023</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">These Swedish pancakes were sooo good, and they were very reasonably priced. Yes, you have to pay cash, so bring cash and eat at this lovely neighborhood gem.</p>
+        <div class="review-meta">
+          <div>
+            <div class="reviewer-name">Chordgal</div>
+            <div class="review-date">July 2018</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">A cozy little restaurant that was almost full the whole time we were there. Plenty of Swedish-inspired interior on the walls. We chose omelette and meatball sandwich and it was okay.</p>
+        <div class="review-meta">
+          <div>
+            <div class="reviewer-name">HeleneA636</div>
+            <div class="review-date">April 2026</div>
+          </div>
+          <div class="review-stars">★★★★☆</div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">All is homemade and fresh. The mashed potatoes are REAL mashed potatoes, not instant. There's nothing on the menu over $11.00. Service is very good; friendly and personal. Overall, cozy and clean.</p>
+        <div class="review-meta">
+          <div>
+            <div class="reviewer-name">Companion771388</div>
+            <div class="review-date">June 2019</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">The prices are very reasonable. The food was great. It was clearly marked cash only so that would likely be the only "downfall" of the quaint establishment. We stopped in after going to the Swedish Museum — perfect combo!</p>
+        <div class="review-meta">
+          <div>
+            <div class="reviewer-name">Tryinginaustin</div>
+            <div class="review-date">July 2018</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-info">
+    <div class="section-tag">Find us</div>
+    <h2>Visit Svea<br>in Andersonville</h2>
+
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="contact-icon-wrap">📍</div>
+        <div class="contact-detail">
+          <strong>Address</strong>
+          <p>5236 N Clark St<br>Chicago, IL 60640</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon-wrap">📞</div>
+        <div class="contact-detail">
+          <strong>Phone</strong>
+          <p>+1 (773) 275-7738</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon-wrap">🍽</div>
+        <div class="contact-detail">
+          <strong>Service Style</strong>
+          <p>Table Service · Takeout · Seating available</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cash-notice">
+      <span>💵</span>
+      <p><strong>Cash or card accepted.</strong> Note: Only one card per table. A 3% surcharge applies to credit card payments.</p>
+    </div>
+  </div>
+
+  <div class="location-map">
+    <iframe
+      class="map-embed"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.0063!2d-87.6681!3d41.9792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd246cd58754b%3A0x1b1cc70ab3b3bab!2s5236%20N%20Clark%20St%2C%20Chicago%2C%20IL%2060640!5e0!3m2!1sen!2sus!4v1"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <div class="map-overlay">
+      <div class="map-address">5236 N Clark St, Chicago</div>
+      <div class="neighborhood-badge">Andersonville</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Svea <em>Restaurant</em></h3>
+      <p>A cozy neighborhood restaurant bringing the warmth of Swedish cuisine to Andersonville since the early days of Chicago's Scandinavian community.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Menu Highlights</h4>
+      <ul>
+        <li>Viking Breakfast</li>
+        <li>Swedish Pancakes</li>
+        <li>Meatball Sandwich</li>
+        <li>Pickled Herring</li>
+        <li>Limpa Toast</li>
+        <li>Korv Sausage</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <ul>
+        <li>Mon–Fri: 7AM–2PM</li>
+        <li>Sat–Sun: 7AM–3PM</li>
+        <li>Breakfast & Lunch</li>
+        <li>Brunch Weekends</li>
+        <li>Takeout Available</li>
+        <li>Table Service</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2024 Svea Restaurant · 5236 N Clark St · Chicago, IL 60640 · (773) 275-7738</p>
+    <div class="swedish-emblem">🇸🇪</div>
+  </div>
+</footer>
+
+</body>
+</html>
